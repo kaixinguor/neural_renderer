@@ -3,7 +3,16 @@ import unittest
 
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
-CUDA_FLAGS = []
+CUDA_FLAGS = {
+    'cxx': ['-O2'],
+    'nvcc': [
+        '-O2',
+        '-gencode=arch=compute_90,code=sm_90',
+        '-gencode=arch=compute_89,code=sm_89',
+        '-gencode=arch=compute_86,code=sm_86',
+        # 你可以根据需要添加更多架构
+    ]
+}
 INSTALL_REQUIREMENTS = []
 
 def test_all():
@@ -15,15 +24,15 @@ ext_modules=[
     CUDAExtension('neural_renderer.cuda.load_textures', [
         'neural_renderer/cuda/load_textures_cuda.cpp',
         'neural_renderer/cuda/load_textures_cuda_kernel.cu',
-        ]),
+        ], extra_compile_args=CUDA_FLAGS),
     CUDAExtension('neural_renderer.cuda.rasterize', [
         'neural_renderer/cuda/rasterize_cuda.cpp',
         'neural_renderer/cuda/rasterize_cuda_kernel.cu',
-        ]),
+        ], extra_compile_args=CUDA_FLAGS),
     CUDAExtension('neural_renderer.cuda.create_texture_image', [
         'neural_renderer/cuda/create_texture_image_cuda.cpp',
         'neural_renderer/cuda/create_texture_image_cuda_kernel.cu',
-        ]),
+        ], extra_compile_args=CUDA_FLAGS),
     ]
 
 setup(
