@@ -8,9 +8,7 @@ CUDA_FLAGS = {
     'nvcc': [
         '-O2',
         '-gencode=arch=compute_90,code=sm_90',
-        '-gencode=arch=compute_89,code=sm_89',
-        '-gencode=arch=compute_86,code=sm_86',
-        # 你可以根据需要添加更多架构
+        '-arch=sm_90',
     ]
 }
 INSTALL_REQUIREMENTS = []
