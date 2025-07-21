@@ -3,14 +3,15 @@ import unittest
 
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
-CUDA_FLAGS = {
-    'cxx': ['-O2'],
-    'nvcc': [
-        '-O2',
-        '-gencode=arch=compute_90,code=sm_90',
-        '-arch=sm_90',
-    ]
-}
+CUDA_FLAGS = []
+#CUDA_FLAGS = {
+#    'cxx': ['-O2'],
+#    'nvcc': [
+#        '-O2',
+#        '-gencode=arch=compute_90,code=sm_90',
+#        '-arch=sm_90',
+#    ]
+#}
 INSTALL_REQUIREMENTS = []
 
 def test_all():
